@@ -1,12 +1,13 @@
-import React from 'react'
+import React,{ useState } from 'react'
 import AuthLayout from '../../components/layout/AuthLayout'
 import { Link, useNavigate } from 'react-router-dom'
 import Input from "../../components/inputs/Input"
+import { validateEmail } from '../../utils/helper'
 
 const Login = () => {
-  const [email, setEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
-  const [error, setError] = React.useState(null)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState(null)
 
   const navigate = useNavigate()
 
