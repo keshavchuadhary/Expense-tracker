@@ -1,6 +1,5 @@
-const User = require("../models/User");
+const xlsx = require("xlsx");
 const Income = require("../models/Income");
-const Expense = require("../models/Expense");
 
 // Add Income
 exports.addIncome = async (req, res) => {
@@ -15,7 +14,7 @@ exports.addIncome = async (req, res) => {
 
         // Create new income record
         const newIncome = new Income({
-            user: userId,
+            userId,
             icon,
             source,
             amount,
@@ -30,10 +29,43 @@ exports.addIncome = async (req, res) => {
 
 // Get All Income   
 exports.getAllIncome = async (req, res) => {
+    const userId = req.user.id;
+    try {
+        const incomes = await Income.find({ userId }).sort({ date: -1 });
+        res.status(200).json(incomes);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
 // Delete Income        
 exports.deleteIncome = async (req, res) => {
+    try {
+        const income = await Income.findById(req.params.id);
+        await Income.findByIdAndDelete(req.params.id);
+        res.status(200).json({ message: "Income deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
 // Download Income Excel
 exports.downloadIncomeExcel = async (req, res) => {
+    const userId = req.user.id;
+    try {
+        const incomes = await Income.find({ user: userId }).sort({ date: -1 });
+        // prepare data for Excel
+        const data = incomes.map((item) => ({
+            Source: item.source,
+            Amount: item.amount,
+            Date: item.date,
+        }));
+
+        // Create Excel file
+        const ws = xlsx.utils.json_to_sheet(data);
+        const wb = xlsx.utils.book_new();
+        xlsx.utils.book_append_sheet(wb, ws, "Income");
+        xlsx.writeFile(wb, 'income_details.xlsx');
+        res.download('income_details.xlsx');
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };

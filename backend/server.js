@@ -5,9 +5,18 @@ const path = require("path");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const IncomeRoutes  = require("./routes/incomeRoutes");
-const ExpenseRoutes = require("./routes/expenseRoutes");
+const expenseRoutes = require("./routes/expenseRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const app = express();
+
+app.use(
+    cors({
+    origin: process.env.CLIENT_URL || "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+    })
+);
 
 //Middleware to handle CORS
 
@@ -16,13 +25,7 @@ app.use(express.json());
 // Serve uploads folder
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-app.use(
-    cors({
-    origin: process.env.CLIENT_URL || "*",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type:application/json", "Authorization"]
-    })
-);
+
 
 
 
@@ -30,7 +33,8 @@ connectDB();
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/income", IncomeRoutes);
-// app.use("/api/v1/expense", ExpenseRoutes);
+app.use("/api/v1/expense", expenseRoutes);
+app.use("/api/v1/dashboard",dashboardRoutes);
 
 
 
