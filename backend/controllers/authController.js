@@ -13,7 +13,7 @@ exports.registerUser = async (req, res) => {
     
     // Validate: Check for missing fields
 
-    if(!fullname || !email || !password) {
+    if(!fullname || !email || !password || !profileImageUrl) {
         return res.status(400).json({ message: "Please fill all fields" });
     }
 
