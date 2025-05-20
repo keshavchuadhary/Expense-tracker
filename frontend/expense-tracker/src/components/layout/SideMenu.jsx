@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { SIDE_MENU_DATA } from "../../utils/data";
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
+import CharAvatar from '../Cards/CharAvatar';
 
 const SideMenu = ({ activeMenu }) => {
   const { user, clearUser } = useContext(UserContext);
@@ -30,15 +31,14 @@ const SideMenu = ({ activeMenu }) => {
             alt="Profile"
             className='w-20 h-20 bg-slate-400 rounded-full object-cover'
           />
-        ) : (
-          <div className='w-20 h-20 bg-slate-200 rounded-full flex items-center justify-center'>
-            <span className='text-2xl text-slate-500'>
-              {user?.fullname?.charAt(0) || '?'}
-            </span>
-          </div>
-        )}
+        ) : <CharAvatar
+          fullname={user?.fullname}
+          width="w-20"
+          height="h-20"
+          style="text-xl"
+          />}
         <h5 className='text-gray-950 font-medium leading-6'>
-          {user?.fullname || "Guest"}
+          {user?.fullname || ""}
         </h5>
       </div>
 
@@ -53,7 +53,7 @@ const SideMenu = ({ activeMenu }) => {
               ${
                 activeMenu === item.label 
                   ? "text-white bg-primary-500 shadow-md"
-                  : "text-slate-600 hover:bg-blue-100 hover:text-black-900"
+                  : "btn-primary"
               }
               active:scale-95 transform
             `}
