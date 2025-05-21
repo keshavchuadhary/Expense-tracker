@@ -49,7 +49,7 @@ const SideMenu = ({ activeMenu }) => {
             key={`menu_${index}`}
             className={`
               w-full flex items-center gap-4 text-sm text-[15px]
-              py-3 px-6 rounded-lg mb-1 transition-all duration-200
+              py-3 px-6 rounded-lg mb-1  duration-200
               ${
                 activeMenu === item.label 
                   ? "text-white bg-primary-500 shadow-md"

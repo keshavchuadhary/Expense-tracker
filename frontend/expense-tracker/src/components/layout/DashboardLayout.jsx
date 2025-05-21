@@ -10,7 +10,7 @@ const DashboardLayout = ({children, activeMenu}) => {
             <Navbar activeMenu={activeMenu} />
             
             {user && (
-                <div className='flex flex-1 '> {/* Add pt-16 for navbar height */}
+                <div className='flex flex-1 '> 
                     <div className='hidden lg:block w-64 flex-shrink-0 sticky top-16 h-[calc(100vh-64px)]'>
                         <SideMenu activeMenu={activeMenu} />
                     </div>
