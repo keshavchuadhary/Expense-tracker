@@ -46,22 +46,21 @@ const SideMenu = ({ activeMenu }) => {
       <div className='flex flex-col gap-1'>
         {SIDE_MENU_DATA.map((item, index) => (
           <button
-            key={`menu_${index}`}
-            className={`
-              w-full flex items-center gap-4 text-sm text-[15px]
-              py-3 px-6 rounded-lg mb-1  duration-200
-              ${
-                activeMenu === item.label 
-                  ? "text-white bg-primary-500 shadow-md"
-                  : "btn-primary"
-              }
-              active:scale-95 transform
-            `}
-            onClick={() => handleClick(item.path)}
-          >
-            <item.icon className='text-xl' />
-            {item.label}
-          </button>
+  key={`menu_${index}`}
+  className={`
+    w-full flex items-center gap-4 text-sm text-[15px]
+    py-3 px-6 rounded-lg mb-1 transition-colors duration-200
+    ${
+      activeMenu === item.label
+        ? "text-white bg-primary-500 shadow-md"
+        : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+    }
+  `}
+  onClick={() => handleClick(item.path)}
+>
+  <item.icon className='text-xl' />
+  {item.label}
+</button>
         ))}
       </div>
     </div>

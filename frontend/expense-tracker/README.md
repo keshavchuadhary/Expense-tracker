@@ -1,12 +1,12 @@
-# React + Vite
+Functionalities Implemented:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. User Authentication – Secure login and sign-up using JWT authentication.
+2. Dashboard Overview – Displays Total Balance, Income, and Expenses in summary cards.
+3. Income Management – Add, view, delete, and export income sources.
+4. Expense Management – Add, view, delete, and export expenses with category-based tracking.
+5. Interactive Charts – Visual representation of income & expenses using Bar, Pie, and Line charts.
+6. Recent Transactions – Displays the latest income and expense records for quick access.
+7. Expense & Income Reports – Download all income and expense data in Excel format.
+8. Mobile Responsive UI – Works seamlessly across desktops, tablets, and mobile devices.
+9. Intuitive Navigation – Sidebar menu with easy access to Dashboard, Income, Expenses, and Logout.
+10. Delete Functionality – Hover over income/expense cards to reveal a delete button for easy
