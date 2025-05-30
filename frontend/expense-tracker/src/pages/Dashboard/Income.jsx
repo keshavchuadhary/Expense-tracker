@@ -11,7 +11,7 @@ import DeleteAlert from '../../components/DeleteAlert'
 import { useUserAuth } from '../../hooks/useUserAuth'
 
 const Income = () => {
-  useUserAuth
+  useUserAuth();
 
   const [incomeData, setIncomeData] = useState([])
   const [loading, setLoading] = useState(false)
@@ -98,7 +98,32 @@ const Income = () => {
   };
 
   //handle download income details
-  const handleDownloadIncomeDetails = async () => {};
+  const handleDownloadIncomeDetails = async () => {
+    try{
+      const response = await axiosInstance.get(
+        API_PATHS.INCOME.DOWNLOAD_INCOME,
+        {
+          responseType: "blob"
+        }
+      );
+
+      // create a URL for the blob
+
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a")
+      link.href = url;
+      link.setAttribute("download","Income_details.xlsx");
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      console.log("Download URL:", API_PATHS.INCOME.DOWNLOAD_INCOME)
+
+    } catch (error){
+      console.error("Error download income details", error)
+      toast.error("failed to download income details. Please try again");
+    }
+  };
 
   useEffect(() => {
     fetchIncomeDetails()

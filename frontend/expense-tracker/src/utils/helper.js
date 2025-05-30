@@ -63,3 +63,24 @@ export const prepareExpenseLineChartData = (data = []) => {
 
   return chartData;
 }
+
+export const calculateMovingAverage = (transactions, months = 3) => {
+  if (!transactions || transactions.length === 0) return null;
+  
+  const monthlyTotals = {};
+  
+  transactions.forEach(transaction => {
+    const monthYear = moment(transaction.date).format('YYYY-MM');
+    monthlyTotals[monthYear] = (monthlyTotals[monthYear] || 0) + transaction.amount;
+  });
+
+  const sortedMonths = Object.keys(monthlyTotals).sort();
+  const availableMonths = Math.min(sortedMonths.length, months);
+  
+  if (availableMonths === 0) return null;
+
+  const lastNMonths = sortedMonths.slice(-availableMonths);
+  const sum = lastNMonths.reduce((acc, month) => acc + monthlyTotals[month], 0);
+  
+  return Math.round(sum / availableMonths);
+};

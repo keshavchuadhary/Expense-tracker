@@ -3,7 +3,7 @@ import { LuDownload, LuCalendar, LuX } from 'react-icons/lu'
 import TransactionInfoCard from '../Cards/TransactionInfoCard'
 import moment from 'moment'
 
-const IncomeList = ({ 
+const ExpenseList = ({ 
   transactions, 
   onDelete, 
   onDownload,
@@ -64,7 +64,7 @@ const IncomeList = ({
   return (
     <div className='card'>
       <div className='flex justify-between items-center mb-4'>
-        <h5 className='text-lg font-semibold'>Income Sources</h5>
+        <h5 className='text-lg font-semibold'>Expense List</h5>
         <div className='flex gap-3'>
           {showSort && (
             <div className='relative'>
@@ -116,22 +116,22 @@ const IncomeList = ({
 
       <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
         {sortedTransactions.length > 0 ? (
-          sortedTransactions.map((income) => (
+          sortedTransactions.map((expense) => (
             <TransactionInfoCard
-              key={income._id}
-              title={income.source}
-              icon={income.icon}
-              date={moment(income.date).format("Do MMM YYYY")}
-              amount={income.amount}
-              type="income"
-              onDelete={() => onDelete(income._id)}
+              key={expense._id}
+              title={expense.category}
+              icon={expense.icon}
+              date={moment(expense.date).format("Do MMM YYYY")}
+              amount={expense.amount}
+              type="expense"
+              onDelete={() => onDelete(expense._id)}
             />
           ))
         ) : (
           <div className="col-span-2 text-center text-gray-500 py-4">
             {hasActiveFilters ? 
-              'No income sources found in selected date range' : 
-              'No income sources found'
+              'No expenses found in selected date range' : 
+              'No expenses found'
             }
           </div>
         )}
@@ -140,4 +140,4 @@ const IncomeList = ({
   )
 }
 
-export default IncomeList
+export default ExpenseList
